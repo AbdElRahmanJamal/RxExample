@@ -15,6 +15,18 @@ public class Player {
         this.position = position;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
     public String getName() {
         return name;
     }

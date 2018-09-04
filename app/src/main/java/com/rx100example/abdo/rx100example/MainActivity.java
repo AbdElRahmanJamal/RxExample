@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
-import static com.rx100example.abdo.rx100example.RX_Operators.ErrorHandling.errorHandlingReturnEmptyObjectIfExceptionThrown;
+import static com.rx100example.abdo.rx100example.RX_Operators.FlatMapConcatMap.concatMapMapOperation;
+import static com.rx100example.abdo.rx100example.RX_Operators.FlatMapConcatMap.flatMapOperation;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<Player> playerList = new ArrayList<>();
@@ -47,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
 //                    Log.e("output: ", throwable.toString());
 //                });
         //errorHandling(playerObservable);
-        errorHandlingReturnEmptyObjectIfExceptionThrown(playerObservable);
+        // errorHandlingReturnEmptyObjectIfExceptionThrown(playerObservable);
+        concatMapMapOperation(playerObservable);
     }
 
     private Observable<Player> createLiverpoolTeamPlayers() {
