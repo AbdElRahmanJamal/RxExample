@@ -15,6 +15,7 @@ public class FlatMapConcatMap {
             Log.d("output: ", player.toString());
         });
     }
+    //FlatMap may interleave emissions of Observables while ConcatMap will save order of emissions
 
     public static void concatMapMapOperation(Observable<Player> playerObservable) {
         playerObservable.concatMap(player -> {
