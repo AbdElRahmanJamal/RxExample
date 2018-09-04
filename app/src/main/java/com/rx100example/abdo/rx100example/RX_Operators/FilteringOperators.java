@@ -14,7 +14,7 @@ public class FilteringOperators {
     public static void firstElementOperation(Observable<Player> playerObservable) {
         playerObservable.firstElement().subscribe(
                 player -> {
-                    Log.d("onCreate: ", player.toString());
+                    Log.d("output: ", player.toString());
                 }
         );
     }
@@ -23,7 +23,7 @@ public class FilteringOperators {
     public static void filterWithFirstOperationWithFunction(Observable<Player> playerObservable) {
         playerObservable.filter(player -> player.getName().equals("Alisson Becker")).firstElement().subscribe(
                 player -> {
-                    Log.d("onCreate: ", player.toString());
+                    Log.d("output: ", player.toString());
                 }
         );
     }
@@ -39,12 +39,12 @@ public class FilteringOperators {
     public static void takeOperationWithFunction(Observable<Player> playerObservable) {
         playerObservable.take(3).subscribe(
                 player -> {
-                    Log.d("onCreate: ", player.toString());
+                    Log.d("output: ", player.toString());
                 }
         );
         playerObservable.takeLast(3).subscribe(
                 player -> {
-                    Log.d("onCreate: ", player.toString());
+                    Log.d("output: ", player.toString());
                 }
         );
     }
@@ -54,15 +54,14 @@ public class FilteringOperators {
     public static void singleOperationWithFunction(Observable<Player> playerObservable) {
         playerObservable.singleElement()
                 .onErrorReturn(throwable -> {
-                    Log.d("onCreate: ", "Sequence contains no elements ");
+                    Log.d("output: ", "Sequence contains no elements ");
                     return new Player("__", "NON", "__");
                 })
                 .subscribe(
                         player -> {
-                            Log.d("onCreate: ", player.toString());
+                            Log.d("output: ", player.toString());
                         }
                 );
-
     }
 
     //get first player with specific name

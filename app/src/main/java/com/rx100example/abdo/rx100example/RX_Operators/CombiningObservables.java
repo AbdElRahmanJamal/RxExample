@@ -19,7 +19,7 @@ public class CombiningObservables {
         observables.add(playerGK);
         observables.add(playerForward);
         Observable.merge(observables).subscribe(player -> {
-            Log.d("onCreate: ", player.toString());
+            Log.d("output: ", player.toString());
         });
     }
 
@@ -30,7 +30,7 @@ public class CombiningObservables {
         Observable.zip(playerForward, playerGK, (GK, forward) -> {
             return new Player(GK.toString(), "  ", forward.toString());
         }).subscribe(player -> {
-            Log.d("onCreate: ", player.toString());
+            Log.d("output: ", player.toString());
         });
     }
 
@@ -42,7 +42,7 @@ public class CombiningObservables {
         Observable.combineLatest(playerForward, playerGK, (GK, forward) -> {
             return new Player(GK.toString(), "  ", forward.toString());
         }).subscribe(player -> {
-            Log.d("onCreate: ", player.toString());
+            Log.d("output: ", player.toString());
         });
     }
 
@@ -54,7 +54,7 @@ public class CombiningObservables {
         Observable.combineLatest(playerForward, playerGK, (GK, forward) -> {
             return new Player(GK.toString(), "  ", forward.toString());
         }).subscribe(player -> {
-            Log.d("onCreate: ", player.toString());
+            Log.d("output: ", player.toString());
         });
     }
 

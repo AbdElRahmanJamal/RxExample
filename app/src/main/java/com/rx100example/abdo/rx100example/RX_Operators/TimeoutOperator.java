@@ -21,11 +21,11 @@ public class TimeoutOperator {
         playerObservable.delay(2, TimeUnit.SECONDS)
                 .timeout(1000, TimeUnit.MILLISECONDS)
                 .onErrorReturn(error -> {
-                    Log.d("onCreate: ", error.toString());
+                    Log.d("output: ", error.toString());
                     return new Player("NON", "NON", "NON");
                 })
                 .subscribe(player -> {
-                    Log.d("onCreate: ", player.toString());
+                    Log.d("output: ", player.toString());
                 });
     }
 
@@ -39,7 +39,7 @@ public class TimeoutOperator {
                     return player.getPosition().equals("Forward");
                 }))
                 .subscribe(player -> {
-                    Log.d("onCreate: ", player.toString());
+                    Log.d("output: ", player.toString());
                 });
     }
 

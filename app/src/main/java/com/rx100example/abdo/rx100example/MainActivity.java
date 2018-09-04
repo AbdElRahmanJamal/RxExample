@@ -2,17 +2,14 @@ package com.rx100example.abdo.rx100example;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.rx100example.abdo.rx100example.model.Player;
 
 import java.util.ArrayList;
 
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
-import static com.rx100example.abdo.rx100example.RX_Operators.FilteringOperators.groupByOperation;
+import static com.rx100example.abdo.rx100example.RX_Operators.ErrorHandling.errorHandlingReturnEmptyObjectIfExceptionThrown;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<Player> playerList = new ArrayList<>();
@@ -24,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         Observable<Player> playerObservable = createLiverpoolTeamPlayers();
 //        FilteringOperators.firstElementOperation(playerObservable);
 //        FilteringOperators.filterWithFirstOperationWithFunction(playerObservable); //filterOpeation
-//         Log.d( "onCreate: ",FilteringOperators.filterOperationWithFunction(playerObservable).size()+"");
+//         Log.d( "output: ",FilteringOperators.filterOperationWithFunction(playerObservable).size()+"");
 //        FilteringOperators.takeOperationWithFunction(playerObservable);
 //        FilteringOperators.singleOperationWithFunction(playerObservable);
         //CombiningObservables.mergeOperation(playerObservable);
@@ -40,15 +37,17 @@ public class MainActivity extends AppCompatActivity {
         //retryWhenOperation(playerObservable);
         //timeoutOperatorWithDuration(playerObservable);
         //timeoutOperatorWithSecondObservable(playerObservable);
-        groupByOperation(playerObservable)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(playerGroups -> {
-                    Log.d("onCreate: ", playerGroups.get(2).getPosition() + " " +
-                            playerGroups.get(2).getPlayers());
-                }, throwable -> {
-                    Log.e("onCreate: ", throwable.toString());
-                });
+//        groupByOperation(playerObservable)
+//                .subscribeOn(Schedulers.newThread())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(playerGroups -> {
+//                    Log.d("output: ", playerGroups.get(2).getPosition() + " " +
+//                            playerGroups.get(2).getPlayers());
+//                }, throwable -> {
+//                    Log.e("output: ", throwable.toString());
+//                });
+        //errorHandling(playerObservable);
+        errorHandlingReturnEmptyObjectIfExceptionThrown(playerObservable);
     }
 
     private Observable<Player> createLiverpoolTeamPlayers() {

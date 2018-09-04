@@ -20,7 +20,7 @@ public class ConditionalOperators {
             }
             return shouldSkip;
         }).subscribe(player -> {
-            Log.d("onCreate: ", player.toString());
+            Log.d("output: ", player.toString());
         });
     }
 
@@ -31,7 +31,7 @@ public class ConditionalOperators {
         Observable<Player> playerGK = playerObservable.filter(player -> player.getPosition().equals("GK")).delay(5, TimeUnit.SECONDS);
         Observable<Player> playerForward = playerObservable.filter(player -> player.getPosition().equals("Forward")).delay(4, TimeUnit.SECONDS);
         Observable.ambArray(playerForward, playerGK).subscribe(player -> {
-            Log.d("onCreate: ", player.toString());
+            Log.d("output: ", player.toString());
         });
     }
 
@@ -44,7 +44,7 @@ public class ConditionalOperators {
         playerGK.all(player -> {
             return player.getPosition().equals("GK");
         }).subscribe(aBoolean -> {
-                    Log.d("onCreate: ", aBoolean.toString());
+                    Log.d("output: ", aBoolean.toString());
                 }
         );
         //will return false
@@ -52,7 +52,7 @@ public class ConditionalOperators {
         playerFW.all(player -> {
             return player.getPosition().equals("GK"); //base on this condition return true or false
         }).subscribe(aBoolean -> {
-                    Log.d("onCreate: ", aBoolean.toString());
+                    Log.d("output: ", aBoolean.toString());
                 }
         );
     }
@@ -61,13 +61,13 @@ public class ConditionalOperators {
         //return false
         Player player = new Player("Liverpool", "Abdo", "FW");
         playerObservable.contains(player.getName().equals("")).subscribe(aBoolean -> {
-                    Log.d("onCreate: ", aBoolean.toString());
+                    Log.d("output: ", aBoolean.toString());
                 }
         );
         //return true
         Player player1 = new Player("Liverpool", "Georginio Wijnaldum", "Midfielder");
         playerObservable.contains(player1).subscribe(aBoolean -> {
-                    Log.d("onCreate: ", aBoolean.toString());
+                    Log.d("output: ", aBoolean.toString());
                 }
         );
     }

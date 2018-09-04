@@ -10,8 +10,6 @@ public class PlayerGroup {
         this.position = position;
         this.players = players;
     }
-
-
     public String getPosition() {
         return position;
     }

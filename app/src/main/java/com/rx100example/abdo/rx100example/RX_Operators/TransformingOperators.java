@@ -16,7 +16,7 @@ public class TransformingOperators {
     //[1,2,3,4] , [5,6,7,8] , [9]
     public static void bufferWithCountOperation(Observable<Player> playerObservable) {
         playerObservable.buffer(10).subscribe(aBoolean -> {
-                    Log.d("onCreate: ", aBoolean.toString());
+                    Log.d("output: ", aBoolean.toString());
                 }
         );
     }
@@ -26,7 +26,7 @@ public class TransformingOperators {
     //after 10 MILLISECONDS [1,2,3,4] , after 20 MILLISECONDS[5,6,7,8] , after 30 MILLISECONDS[9]
     public static void bufferWithTimeSpanCountOperation(Observable<Player> playerObservable) {
         playerObservable.buffer(10, TimeUnit.SECONDS, 4).subscribe(aBoolean -> {
-                    Log.d("onCreate: ", aBoolean.toString());
+                    Log.d("output: ", aBoolean.toString());
                 }
         );
     }
@@ -39,12 +39,12 @@ public class TransformingOperators {
         }).retryWhen(errors -> errors.flatMap(error -> {
             // For IOExceptions, we  retry
             if (error instanceof Resources.NotFoundException) {
-                Log.d("onCreate: ", error.getMessage());
+                Log.d("output: ", error.getMessage());
                 return Observable.just(error);
             }
             // For anything else, don't retry
             return Observable.error(error);
         })).subscribe(player -> {
-                    Log.d("onCreate: ", player.toString());});
+                    Log.d("output: ", player.toString());});
     }
 }
