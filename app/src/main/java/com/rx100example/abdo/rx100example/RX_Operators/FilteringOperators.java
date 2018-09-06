@@ -1,22 +1,16 @@
 package com.rx100example.abdo.rx100example.RX_Operators;
 
 import android.util.Log;
-
 import com.rx100example.abdo.rx100example.model.Player;
 import com.rx100example.abdo.rx100example.model.PlayerGroup;
-
-import java.util.List;
-
 import io.reactivex.Observable;
+import java.util.List;
 
 public class FilteringOperators {
     //return first element
     public static void firstElementOperation(Observable<Player> playerObservable) {
-        playerObservable.firstElement().subscribe(
-                player -> {
-                    Log.d("output: ", player.toString());
-                }
-        );
+        playerObservable.firstElement().
+            subscribe(player -> Log.d("output: ", player.toString()));
     }
 
     //get first player with specific name
@@ -37,22 +31,14 @@ public class FilteringOperators {
 
     //take first 3 elements and last 3 elements
     public static void takeOperationWithFunction(Observable<Player> playerObservable) {
-        playerObservable.take(3).subscribe(
-                player -> {
-                    Log.d("output: ", player.toString());
-                }
-        );
-        playerObservable.takeLast(3).subscribe(
-                player -> {
-                    Log.d("output: ", player.toString());
-                }
-        );
+        playerObservable.take(3).subscribe(player -> Log.d("output: ", player.toString()));
+        playerObservable.takeLast(3).subscribe(player -> Log.d("output: ", player.toString()));
     }
 
     //check if Observable has one element or not if have one it will work correctly
     // if have more will throw exception
     public static void singleOperationWithFunction(Observable<Player> playerObservable) {
-        playerObservable.singleElement()
+        playerObservable.singleElement()//TODO: to be discussed
                 .onErrorReturn(throwable -> {
                     Log.d("output: ", "Sequence contains no elements ");
                     return new Player("__", "NON", "__");
