@@ -1,12 +1,13 @@
 package com.rx100example.abdo.rx100example.RX_Operators;
 
 import android.util.Log;
-
 import com.rx100example.abdo.rx100example.model.Player;
-
-import java.util.concurrent.TimeUnit;
-
 import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import java.util.concurrent.TimeUnit;
 
 //allows you to abort an Observable with an
 // onError termination if that Observable fails to emit any items during a specified span of time
@@ -42,5 +43,30 @@ public class TimeoutOperator {
                     Log.d("output: ", player.toString());
                 });
     }
+
+  //create an Observable that emits a particular item after a given delay
+  public static void timerOperator(Observable<Player> playerObservable) {
+    Observable.timer(2, TimeUnit.SECONDS)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Observer<Long>() {
+          @Override public void onSubscribe(Disposable d) {
+            d = playerObservable.subscribe(player -> Log.d("output: ", player.toString()));
+          }
+
+          @Override public void onNext(Long aLong) {
+            Log.d("output: ", aLong.toString());
+          }
+
+          @Override public void onError(Throwable e) {
+            Log.d("output: ", e.toString());
+          }
+
+          @Override public void onComplete() {
+            Log.d("output: ", "DONE");
+          }
+        });
+  }
+
 
 }

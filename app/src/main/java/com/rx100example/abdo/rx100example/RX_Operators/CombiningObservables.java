@@ -53,12 +53,15 @@ public class CombiningObservables {
   public static void switchOnNextOperation(Observable<Player> playerObservable) {
     Observable<Player> playerGK =
         playerObservable.filter(player -> player.getPosition().equals("GK"))
-            .delay(2, TimeUnit.SECONDS);
+            .delay(500, TimeUnit.MICROSECONDS);
     Observable<Player> playerForward =
-        playerObservable.filter(player -> player.getPosition().equals("Forward"))
-            .delay(5, TimeUnit.SECONDS);
-    Observable.combineLatest(playerForward, playerGK,
-        (GK, forward) -> new Player(GK.toString(), "  ", forward.toString()))
-        .subscribe(player -> Log.d("output: ", player.toString()));
+        playerObservable.filter(player -> player.getPosition().equals("Forward") ||
+            player.getPosition().equals("Midfielder")
+        ).delay(200, TimeUnit.MICROSECONDS);
+    Observable.switchOnNext(Observable.timer(0, TimeUnit.MILLISECONDS)
+        .map(num -> playerForward)
+        .concatWith(Observable.timer(1000, TimeUnit.MILLISECONDS)
+            .map(num2 -> playerGK)))
+        .subscribe((player) -> Log.d("output: ", player.toString()));
   }
 }
