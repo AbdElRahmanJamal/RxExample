@@ -32,6 +32,7 @@ public class ErrorHandling {
       Log.d("outputs: ", player.toString());
     });
   }
+
   //retry() resubscribes when it receives onError().
   //repeat() resubscribes when it receives onCompleted().
   public static void retryWhenOperation(Observable<Player> playerObservable) {
@@ -46,7 +47,8 @@ public class ErrorHandling {
       // For anything else, don't retry
       return Observable.error(error);
     })).subscribe(player -> {
-      Log.d("output: ", player.toString());});
+      Log.d("output: ", player.toString());
+    });
   }
 
 }

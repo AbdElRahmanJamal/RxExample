@@ -1,6 +1,5 @@
 package com.rx100example.abdo.rx100example.RX_Operators;
 
-import android.content.res.Resources;
 import android.util.Log;
 import com.rx100example.abdo.rx100example.model.Player;
 import com.rx100example.abdo.rx100example.model.PlayerGroup;
