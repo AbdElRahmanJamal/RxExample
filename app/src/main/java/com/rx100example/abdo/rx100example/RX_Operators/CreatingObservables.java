@@ -97,7 +97,7 @@ public class CreatingObservables {
 
   //do not create the Observable until the observer subscribes,
   // and create a fresh Observable for each observer
-  //just and create creation tools store the value of data when created, not when subscribed
+  //just and fromArray creation tools store the value of data when created, not when subscribed
   //defer   creation tools store the value of data when subscribed
   //defer() is that it creates a new Observable each time you get a subscriber.
   // create() can use the same function for each subscriber, so it's more efficient.
