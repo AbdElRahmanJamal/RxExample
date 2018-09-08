@@ -7,8 +7,6 @@ import io.reactivex.Observable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.rx100example.abdo.rx100example.RX_Operators.CreatingObservables.deferOperator;
-
 public class MainActivity extends AppCompatActivity {
   ArrayList<Player> playerList = new ArrayList<>();
 
@@ -54,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
     // justOperator(players);
     //IntervalOperator(players);
     //IntervalRangeOperator(players, 3, 4);
-    deferOperator(players);
+    //deferOperator(players);
+    //mapOperation(playerObservable);
+    //scanOperation();
   }
 
   private Observable<Player> createLiverpoolTeamPlayers() {
