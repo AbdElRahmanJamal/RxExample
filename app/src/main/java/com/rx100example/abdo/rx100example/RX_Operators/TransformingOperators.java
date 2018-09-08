@@ -29,25 +29,7 @@ public class TransformingOperators {
         );
     }
 
-    //retry() resubscribes when it receives onError().
-    //repeat() resubscribes when it receives onCompleted().
-    public static void retryWhenOperation(Observable<Player> playerObservable) {
-        playerObservable.filter(player -> {
-            return player.getPosition().equals("GK");
-        }).retryWhen(errors -> errors.flatMap(error -> {
-            // For IOExceptions, we  retry
-            if (error instanceof Resources.NotFoundException) {
-                Log.d("output: ", error.getMessage());
-                return Observable.just(error);
-            }
-            // For anything else, don't retry
-            return Observable.error(error);
-        })).subscribe(player -> {
-                    Log.d("output: ", player.toString());});
-    }
-
-    public static Observable<List<PlayerGroup>> groupByOperation(
-        Observable<Player> playerObservable) {
+    public static Observable<List<PlayerGroup>> groupByOperation(Observable<Player> playerObservable) {
         return playerObservable
             .groupBy(Player::getPosition)
             .flatMap(playerPositionGroup -> {
