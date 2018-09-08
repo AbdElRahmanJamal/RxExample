@@ -49,20 +49,4 @@ public class FilteringOperators {
                         }
                 );
     }
-
-    //get first player with specific name
-    public static Observable<List<PlayerGroup>> groupByOperation(Observable<Player> playerObservable) {
-
-        return playerObservable
-                .groupBy(Player::getPosition)
-                .flatMap(playerPositionGroup -> {
-                    String playerPositionGroupKey = playerPositionGroup.getKey();
-                    return Observable.zip(
-                            Observable.just(playerPositionGroupKey),
-                            playerPositionGroup.toList().toObservable(),
-                            PlayerGroup::new);
-                })
-                .toList().toObservable();
-
-    }
 }

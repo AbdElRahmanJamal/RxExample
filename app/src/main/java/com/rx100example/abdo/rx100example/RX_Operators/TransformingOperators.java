@@ -2,13 +2,11 @@ package com.rx100example.abdo.rx100example.RX_Operators;
 
 import android.content.res.Resources;
 import android.util.Log;
-
 import com.rx100example.abdo.rx100example.model.Player;
-
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
+import com.rx100example.abdo.rx100example.model.PlayerGroup;
 import io.reactivex.Observable;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TransformingOperators {
     //it will divide source observable  into 10 and then return observable with this 10 items every time
@@ -46,5 +44,37 @@ public class TransformingOperators {
             return Observable.error(error);
         })).subscribe(player -> {
                     Log.d("output: ", player.toString());});
+    }
+
+    public static Observable<List<PlayerGroup>> groupByOperation(
+        Observable<Player> playerObservable) {
+        return playerObservable
+            .groupBy(Player::getPosition)
+            .flatMap(playerPositionGroup -> {
+                String playerPositionGroupKey = playerPositionGroup.getKey();
+                return Observable.zip(
+                    Observable.just(playerPositionGroupKey),
+                    playerPositionGroup.toList().toObservable(),
+                    PlayerGroup::new);
+            })
+            .toList().toObservable();
+    }
+
+    //the main different between flatMap and concatMap is order
+    public static void flatMapOperation(Observable<Player> playerObservable) {
+        playerObservable.flatMap(player -> {
+            return Observable.just(player.getName());
+        }).subscribe(player -> {
+            Log.d("output: ", player.toString());
+        });
+    }
+    //FlatMap may interleave emissions of Observables while ConcatMap will save order of emissions
+
+    public static void concatMapMapOperation(Observable<Player> playerObservable) {
+        playerObservable.concatMap(player -> {
+            return Observable.just(player.getName());
+        }).subscribe(player -> {
+            Log.d("output: ", player.toString());
+        });
     }
 }

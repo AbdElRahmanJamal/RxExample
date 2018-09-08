@@ -43,30 +43,4 @@ public class TimeoutOperator {
                     Log.d("output: ", player.toString());
                 });
     }
-
-  //create an Observable that emits a particular item after a given delay
-  public static void timerOperator(Observable<Player> playerObservable) {
-    Observable.timer(2, TimeUnit.SECONDS)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Observer<Long>() {
-          @Override public void onSubscribe(Disposable d) {
-            d = playerObservable.subscribe(player -> Log.d("output: ", player.toString()));
-          }
-
-          @Override public void onNext(Long aLong) {
-            Log.d("output: ", aLong.toString());
-          }
-
-          @Override public void onError(Throwable e) {
-            Log.d("output: ", e.toString());
-          }
-
-          @Override public void onComplete() {
-            Log.d("output: ", "DONE");
-          }
-        });
-  }
-
-
 }

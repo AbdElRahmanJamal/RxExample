@@ -5,8 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.rx100example.abdo.rx100example.model.Player;
 import io.reactivex.Observable;
 import java.util.ArrayList;
+import java.util.List;
 
-import static com.rx100example.abdo.rx100example.RX_Operators.TimeoutOperator.timerOperator;
+import static com.rx100example.abdo.rx100example.RX_Operators.CreatingObservables.deferOperator;
 
 public class MainActivity extends AppCompatActivity {
   ArrayList<Player> playerList = new ArrayList<>();
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     Observable<Player> playerObservable = createLiverpoolTeamPlayers();
+    List<Player> players = createLiverpoolTeamPlayers().toList().blockingGet();
     //        FilteringOperators.firstElementOperation(playerObservable);
     //        FilteringOperators.filterWithFirstOperationWithFunction(playerObservable); //filterOpeation
     //         Log.d( "output: ",FilteringOperators.filterOperationWithFunction(playerObservable).size()+"");
@@ -46,7 +48,13 @@ public class MainActivity extends AppCompatActivity {
     //errorHandling(playerObservable);
     // errorHandlingReturnEmptyObjectIfExceptionThrown(playerObservable);
     // concatMapMapOperation(playerObservable);
-    timerOperator(playerObservable);
+    //timerOperator(playerObservable);
+    //createOperator(players);
+    //rangeOperator(players,3,players.size());
+    // justOperator(players);
+    //IntervalOperator(players);
+    //IntervalRangeOperator(players, 3, 4);
+    deferOperator(players);
   }
 
   private Observable<Player> createLiverpoolTeamPlayers() {
