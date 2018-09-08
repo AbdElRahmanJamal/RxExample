@@ -91,6 +91,8 @@ public class TransformingOperators {
                 Log.d("output: ", accumulator.toString());
             });
     }
+
+    //window Operation 
     //**periodically subdivide items from an Observable into Observable windows
     // and emit these windows rather than emitting the items one at a time
 
